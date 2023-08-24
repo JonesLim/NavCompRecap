@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jones.navcomprecap.R
 import com.jones.navcomprecap.core.constants.Constants
+import com.jones.navcomprecap.core.utils.update
 import com.jones.navcomprecap.databinding.FileLayoutBinding
 import java.io.File
 
@@ -25,11 +26,19 @@ class FileAdapter(
     override fun getItemCount(): Int = files.size
 
     fun setFiles(files: List<File>) {
+        val oldList = this.files
+
         this.files = files
+
 //        files.forEach {
 //            Log.d("file", it.name)
 //        }
-        notifyDataSetChanged()
+
+        update(oldList, this.files) { item1, item2 ->
+            item1.absolutePath == item2.absolutePath
+        }
+
+//        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

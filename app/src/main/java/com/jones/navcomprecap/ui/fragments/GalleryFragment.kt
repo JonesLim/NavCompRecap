@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jones.navcomprecap.core.constants.Constants
+import com.jones.navcomprecap.core.utils.isImage
 import com.jones.navcomprecap.databinding.FragmentGalleryBinding
 import com.jones.navcomprecap.ui.adapter.GalleryAdapter
 import java.io.File
@@ -53,7 +54,7 @@ class GalleryFragment : Fragment() {
     }
 
     private fun scan(file: File) {
-        if (Regex(Constants.imageReg).containsMatchIn(file.name)) {
+        if (file.isImage()) {
             listOfImages.add(file)
             return
         }
